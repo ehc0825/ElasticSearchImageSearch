@@ -18,24 +18,24 @@ import org.springframework.context.annotation.Configuration;
 public class ElasticSearchConfig {
 
 
-    @Value("elasticsearch.protocol")
+    @Value("${elasticsearch.protocol}")
     private String elastic_protocol;
 
-    @Value("elasticsearch.host")
+    @Value("${elasticsearch.host}")
     private String elastic_host;
 
-    @Value("elasticsearch.port")
-    private int elastics_port;
+    @Value("${elasticsearch.port}")
+    private int elastic_port;
 
-    @Value("elasticsearch.id")
+    @Value("${elasticsearch.id}")
     private String elastic_id;
 
-    @Value("elasticsearch.password")
+    @Value("${elasticsearch.password}")
     private String elastic_password;
 
     @Bean(name = "client",destroyMethod = "close")
     public RestHighLevelClient highLevelClient(){
-        RestClientBuilder restClientBuilder = RestClient.builder(new HttpHost(elastic_host, elastics_port, elastic_protocol));
+        RestClientBuilder restClientBuilder = RestClient.builder(new HttpHost(elastic_host, elastic_port, elastic_protocol));
 
         restClientBuilder.setRequestConfigCallback(new RestClientBuilder.RequestConfigCallback() {
             @Override
