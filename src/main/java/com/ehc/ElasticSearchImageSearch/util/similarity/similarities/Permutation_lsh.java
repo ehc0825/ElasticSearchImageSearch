@@ -8,7 +8,7 @@ public class Permutation_lsh extends Similarity {
         this.similarityName="permutation_lsh";
     }
     @Override
-    public String queryForSimilarity(String from, String size, String vector) {
+    public String queryForSimilarity(int from, int size, String vector) {
         return ImageSearchQuery.basedFrontQuery(from,size)
                 +ImageSearchQuery.getVectorForQuery(vector)
                 +ImageSearchQuery.basedTailQueryForPermutation_lsh();

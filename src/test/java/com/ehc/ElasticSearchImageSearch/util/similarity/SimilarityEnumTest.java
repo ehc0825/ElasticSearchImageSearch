@@ -45,10 +45,11 @@ class SimilarityEnumTest {
     @Test
     void ImageSearchQueryGetTest()
     {
-        String query=SimilarityEnum.getImageQueryBySimilarity("cosine","0","10","{\"vector\":[0.9217332601547241,1.523964524269104,1.6131728887557983,1.0742337703704834]}");
+        String query=SimilarityEnum.getImageQueryBySimilarity("cosine",0,10,"{\"vector\":[0.9217332601547241,1.523964524269104,1.6131728887557983,1.0742337703704834]}");
         if(query.contains("angular"))
         {
             System.out.println("이미지 쿼리 Get성공");
+            System.out.println(query);
         }else
         {
             System.out.println("이미지 쿼리 Get실패");

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class ImageSearchQuery {
     //모든 similarity 이미지검색 쿼리의 베이스 쿼리(앞)
-    public static String basedFrontQuery(String from, String size){
+    public static String basedFrontQuery(int from, int size){
         String query = "{\n" +
                 "\"from\":"+from+","+
                 "\"size\":"+size+","+

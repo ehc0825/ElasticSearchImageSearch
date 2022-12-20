@@ -10,7 +10,6 @@ import java.util.Map;
 
 
 
-@Getter
 public enum SimilarityEnum {
 
     COSINE(new Cosine()),
@@ -40,7 +39,7 @@ public enum SimilarityEnum {
     /**
      * 해당 similarityName에 맞는 ImageSearchQuery를 return
      */
-    public static String getImageQueryBySimilarity(String similarityName,String from,String size, String vector)
+    public static String getImageQueryBySimilarity(String similarityName,int from,int size, String vector)
     {
         Map<String, Similarity> similarityMap=getSimilarityMap();
         String query=similarityMap.get(similarityName).queryForSimilarity(from,size,vector);

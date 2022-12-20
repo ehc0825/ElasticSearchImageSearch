@@ -9,7 +9,7 @@ public class L2 extends Similarity {
         this.similarityName="l2";
     }
     @Override
-    public String queryForSimilarity(String from, String size, String vector) {
+    public String queryForSimilarity(int from, int size, String vector) {
         return ImageSearchQuery.basedFrontQuery(from,size)
                 +ImageSearchQuery.getVectorForQuery(vector)
                 +ImageSearchQuery.basedTailQueryForL2();
