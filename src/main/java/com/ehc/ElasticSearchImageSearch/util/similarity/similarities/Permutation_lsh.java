@@ -6,6 +6,7 @@ import com.ehc.ElasticSearchImageSearch.util.similarity.Similarity;
 public class Permutation_lsh extends Similarity {
     public Permutation_lsh(){
         this.similarityName="permutation_lsh";
+        this.indexName="test-image-vector-permutation_lsh";
     }
     @Override
     public String queryForSimilarity(int from, int size, String vector) {

@@ -7,6 +7,7 @@ public class L2 extends Similarity {
     public L2()
     {
         this.similarityName="l2";
+        this.indexName="test-image-vector-l2";
     }
     @Override
     public String queryForSimilarity(int from, int size, String vector) {

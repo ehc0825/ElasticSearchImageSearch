@@ -42,7 +42,15 @@ public enum SimilarityEnum {
     public static String getImageQueryBySimilarity(String similarityName,int from,int size, String vector)
     {
         Map<String, Similarity> similarityMap=getSimilarityMap();
-        String query=similarityMap.get(similarityName).queryForSimilarity(from,size,vector);
-        return query;
+        return similarityMap.get(similarityName).queryForSimilarity(from,size,vector);
+    }
+
+    /**
+     * 해당 similarityName에 맞는 indexName을 return
+     */
+    public static String getIndexNameBySimilarity(String similarityName)
+    {
+        Map<String, Similarity> similarityMap=getSimilarityMap();
+        return similarityMap.get(similarityName).indexName;
     }
 }

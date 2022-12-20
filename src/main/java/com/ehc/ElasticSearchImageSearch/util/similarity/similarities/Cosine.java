@@ -6,6 +6,7 @@ import com.ehc.ElasticSearchImageSearch.util.similarity.Similarity;
 public class Cosine extends Similarity {
     public Cosine(){
     this.similarityName="cosine";
+    this.indexName="test-image-vector-angular";
     }
     @Override
     public String queryForSimilarity(int from, int size, String vector) {
