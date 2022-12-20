@@ -1,13 +1,16 @@
 package com.ehc.ElasticSearchImageSearch.util.similarity.similarities;
 
+import com.ehc.ElasticSearchImageSearch.util.similarity.ImageSearchQuery;
 import com.ehc.ElasticSearchImageSearch.util.similarity.Similarity;
 
 public class Cosine extends Similarity {
     public Cosine(){
-    this.similarity="angular";
+    this.similarityName="cosine";
     }
     @Override
-    public String queryForSimalarity(String from, String size, String vector) {
-        return null;
+    public String queryForSimilarity(String from, String size, String vector) {
+        return ImageSearchQuery.basedFrontQuery(from,size)
+                +ImageSearchQuery.getVectorForQuery(vector)
+                +ImageSearchQuery.basedTailQueryForCosine();
     }
 }

@@ -20,6 +20,7 @@ class ImageToVectorTest {
         if(!vector.equals("")&&vector!=null)
         {
             System.out.println("image vector화 성공");
+            System.out.println(vector);
         }
         else
         {

@@ -1,13 +1,16 @@
 package com.ehc.ElasticSearchImageSearch.util.similarity.similarities;
 
+import com.ehc.ElasticSearchImageSearch.util.similarity.ImageSearchQuery;
 import com.ehc.ElasticSearchImageSearch.util.similarity.Similarity;
 
 public class Permutation_lsh extends Similarity {
     public Permutation_lsh(){
-        this.similarity="permutation_lsh";
+        this.similarityName="permutation_lsh";
     }
     @Override
-    public String queryForSimalarity(String from, String size, String vector) {
-        return null;
+    public String queryForSimilarity(String from, String size, String vector) {
+        return ImageSearchQuery.basedFrontQuery(from,size)
+                +ImageSearchQuery.getVectorForQuery(vector)
+                +ImageSearchQuery.basedTailQueryForPermutation_lsh();
     }
 }
