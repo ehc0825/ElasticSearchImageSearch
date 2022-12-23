@@ -1,8 +1,7 @@
 package com.ehc.ElasticSearchImageSearch.util;
 
-import com.ehc.ElasticSearchImageSearch.util.similarity.similarities.Cosine;
 import com.ehc.elastiknnSimilarityQuery.QueryBuilder;
-import com.ehc.elastiknnSimilarityQuery.SimilarityOption;
+import com.ehc.elastiknnSimilarityQuery.Similarity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -48,7 +47,7 @@ class ImageToVectorTest {
                 break;
         }
         String[] vectors=vectorForQuery.split(",");
-        String query= QueryBuilder.buildKnnQuery(SimilarityOption.COSINE,"vector",0,10,vectors);
+        String query= QueryBuilder.buildKnnQuery(Similarity.COSINE,"vector",0,10,vectors);
         System.out.println(query);
 
     }
