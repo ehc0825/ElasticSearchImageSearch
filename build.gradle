@@ -23,6 +23,7 @@ dependencies {
 	implementation 'org.elasticsearch:elasticsearch:7.5.1'
 	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.5.1'
 	implementation 'org.elasticsearch.client:elasticsearch-rest-client:7.5.1'
+	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
