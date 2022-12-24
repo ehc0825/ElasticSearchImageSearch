@@ -52,25 +52,6 @@ class ImageToVectorTest {
         }
     }
 
-    @Test
-    String 라이브러리_테스트()
-    {
-        String imageUrl="https://dimg.donga.com/ugc/CDB/SHINDONGA/Article/62/65/e6/3e/6265e63e0bf7d2738276.jpg";
-        String vector=imageToVector.imageUrlToVector(imageUrl);
-        String vectorForQuery="";
-        Pattern pattern = Pattern.compile("(\\[)(.*?)(\\])");
-        Matcher matcher= pattern.matcher(vector);
-        while (matcher.find()) {
-            vectorForQuery=matcher.group(2);
-            if(matcher.group(1) ==  null)
-                break;
-        }
-        String[] vectors=vectorForQuery.split(",");
-        String query= KnnQueryBuilder.buildStringKnnQuery(Similarity.COSINE,"vector",0,10,vectors);
-        System.out.println(query);
-        return query;
-
-    }
 
     @Test
     void 서치빌드연동테스트() throws IOException {

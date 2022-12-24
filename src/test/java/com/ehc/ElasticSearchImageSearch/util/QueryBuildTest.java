@@ -35,7 +35,8 @@ public class QueryBuildTest {
                 break;
         }
         String[] vectors=vectorForQuery.split(",");
-        String query= KnnQueryBuilder.buildStringKnnQuery(Similarity.PERMUTATION_LSH,"vector",0,10,vectors);
+//        String query=new KnnQueryBuilder("vector2",Similarity.COSINE,vectors,30).toString(0,10);
+        String query=new KnnQueryBuilder("vector",Similarity.L2,vectors).toString(0,10);
         System.out.println(query);
     }
 
