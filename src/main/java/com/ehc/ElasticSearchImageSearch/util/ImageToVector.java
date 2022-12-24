@@ -1,5 +1,7 @@
 package com.ehc.ElasticSearchImageSearch.util;
 
+import com.ehc.ElasticSearchImageSearch.dao.ResponseVector;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -16,22 +18,21 @@ public class ImageToVector {
     @Value("${imageToVectorAPI.urlToVec}")
     private String urlToVecApiUrl;
 
-    public String imageUrlToVector(String ImageUrl){
+    public String[] imageUrlToVector(String ImageUrl){
         Map<String,Object> jsonMap=new HashMap<>();
         jsonMap.put("image_url",ImageUrl);
-        ResponseEntity<String> response=vectorApiResponse(urlToVecApiUrl,jsonMap);
-        String vector= response.getBody();
+        ResponseEntity<ResponseVector> response=vectorApiResponse(urlToVecApiUrl,jsonMap);
+        String vector[]= response.getBody().vector;
         return vector;
     }
 
 
-    private ResponseEntity<String> vectorApiResponse(String apiUrl,Map<String,Object> jsonMap){
+    private ResponseEntity<ResponseVector> vectorApiResponse(String apiUrl, Map<String,Object> jsonMap){
         HttpHeaders headers=new HttpHeaders();
         headers.setContentType(new MediaType("application","json", Charset.forName("UTF-8")));
         HttpEntity entity=new HttpEntity<>(jsonMap,headers);
         RestTemplate restTemplate=new RestTemplate();
-        ResponseEntity<String> responseEntity=restTemplate.exchange(apiUrl, HttpMethod.POST,entity,String.class);
-        return responseEntity;
+        return restTemplate.exchange(apiUrl, HttpMethod.POST,entity, ResponseVector.class);
     }
 
 }

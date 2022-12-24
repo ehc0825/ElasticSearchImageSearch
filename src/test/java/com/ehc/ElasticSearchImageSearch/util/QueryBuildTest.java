@@ -1,9 +1,9 @@
 package com.ehc.ElasticSearchImageSearch.util;
 
-import com.ehc.elastiknnSimilarityQuery.KnnQueryBuilder;
 import com.ehc.elastiknnSimilarityQuery.Similarity;
+import com.ehc.elastiknnSimilarityQuery.query.KnnQueryBuilder;
 import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.client.RestClient;
+
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.junit.jupiter.api.Test;
@@ -25,18 +25,13 @@ public class QueryBuildTest {
     @Test
     void String_쿼리_테스트(){
         String imageUrl="https://dimg.donga.com/ugc/CDB/SHINDONGA/Article/62/65/e6/3e/6265e63e0bf7d2738276.jpg";
-        String vector=imageToVector.imageUrlToVector(imageUrl);
-        String vectorForQuery="";
-        Pattern pattern = Pattern.compile("(\\[)(.*?)(\\])");
-        Matcher matcher= pattern.matcher(vector);
-        while (matcher.find()) {
-            vectorForQuery=matcher.group(2);
-            if(matcher.group(1) ==  null)
-                break;
-        }
-        String[] vectors=vectorForQuery.split(",");
-//        String query=new KnnQueryBuilder("vector2",Similarity.COSINE,vectors,30).toString(0,10);
-        String query=new KnnQueryBuilder("vector",Similarity.L2,vectors).toString(0,10);
+        String[] vector=imageToVector.imageUrlToVector(imageUrl);
+        SearchSourceBuilder searchSourceBuilder=new SearchSourceBuilder();
+        searchSourceBuilder.from(0);
+        searchSourceBuilder.size(10);
+        KnnQueryBuilder knnQueryBuilder=new KnnQueryBuilder("vector",Similarity.L2,vector);
+        searchSourceBuilder.query(knnQueryBuilder);
+        String query=searchSourceBuilder.toString();
         System.out.println(query);
     }
 
@@ -44,16 +39,7 @@ public class QueryBuildTest {
     void KnnQueryBuildOption테스트()
     {
         String imageUrl="https://dimg.donga.com/ugc/CDB/SHINDONGA/Article/62/65/e6/3e/6265e63e0bf7d2738276.jpg";
-        String vector=imageToVector.imageUrlToVector(imageUrl);
-        String vectorForQuery="";
-        Pattern pattern = Pattern.compile("(\\[)(.*?)(\\])");
-        Matcher matcher= pattern.matcher(vector);
-        while (matcher.find()) {
-            vectorForQuery=matcher.group(2);
-            if(matcher.group(1) ==  null)
-                break;
-        }
-        String[] vectors=vectorForQuery.split(",");
+        String[] vectors=imageToVector.imageUrlToVector(imageUrl);
         SearchRequest searchRequest= new SearchRequest("test-image-vector-angular");
         SearchSourceBuilder searchSourceBuilder=new SearchSourceBuilder();
         KnnQueryBuilder knnQueryBuilder=new KnnQueryBuilder("vector",Similarity.PERMUTATION_LSH,vectors,100);
@@ -63,5 +49,14 @@ public class QueryBuildTest {
         searchRequest.source(searchSourceBuilder);
         System.out.println("검색 소스");
         System.out.println(searchSourceBuilder);
+    }
+    @Test
+    void SimilarityFindTest(){
+       if(Similarity.find("exact").toString().equals("exact")) {
+           System.out.println("성공");
+       }
+       else {
+           System.out.println("실패");
+       }
     }
 }
