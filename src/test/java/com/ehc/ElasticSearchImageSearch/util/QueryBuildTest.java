@@ -42,7 +42,7 @@ public class QueryBuildTest {
         String[] vectors=imageToVector.imageUrlToVector(imageUrl);
         SearchRequest searchRequest= new SearchRequest("test-image-vector-angular");
         SearchSourceBuilder searchSourceBuilder=new SearchSourceBuilder();
-        KnnQueryBuilder knnQueryBuilder=new KnnQueryBuilder("vector",Similarity.PERMUTATION_LSH,vectors,100);
+        KnnQueryBuilder knnQueryBuilder=new KnnQueryBuilder("vector",Similarity.COSINE,vectors,100);
         searchSourceBuilder.size(10);
         searchSourceBuilder.from(0);
         searchSourceBuilder.query(knnQueryBuilder);
