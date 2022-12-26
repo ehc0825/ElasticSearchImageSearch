@@ -1,7 +1,7 @@
 package com.ehc.ElasticSearchImageSearch.controller;
 
 import com.ehc.ElasticSearchImageSearch.dto.RequestParameter;
-import com.ehc.ElasticSearchImageSearch.dao.ImageSearchResults;
+import com.ehc.ElasticSearchImageSearch.dto.ImageSearchResults;
 import com.ehc.ElasticSearchImageSearch.service.ImageSearchService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;

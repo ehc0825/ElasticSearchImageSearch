@@ -1,8 +1,8 @@
 package com.ehc.ElasticSearchImageSearch.service;
 
-import com.ehc.ElasticSearchImageSearch.dto.ImageSearchDao;
+import com.ehc.ElasticSearchImageSearch.dao.ImageSearchDao;
 import com.ehc.ElasticSearchImageSearch.dto.RequestParameter;
-import com.ehc.ElasticSearchImageSearch.dao.ImageSearchResults;
+import com.ehc.ElasticSearchImageSearch.dto.ImageSearchResults;
 import com.ehc.ElasticSearchImageSearch.util.ImageToVector;
 import com.ehc.ElasticSearchImageSearch.util.MappingResults;
 import com.ehc.elastiknnSimilarityQuery.Similarity;

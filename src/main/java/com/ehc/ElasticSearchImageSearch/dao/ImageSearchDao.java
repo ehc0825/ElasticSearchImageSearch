@@ -1,4 +1,4 @@
-package com.ehc.ElasticSearchImageSearch.dto;
+package com.ehc.ElasticSearchImageSearch.dao;
 
 import com.ehc.ElasticSearchImageSearch.util.similarity.SimilarityEnum;
 import org.apache.http.util.EntityUtils;
