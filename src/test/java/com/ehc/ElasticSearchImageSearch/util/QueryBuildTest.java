@@ -4,12 +4,19 @@ import com.ehc.elastiknnSimilarityQuery.Similarity;
 import com.ehc.elastiknnSimilarityQuery.query.KnnQueryBuilder;
 import org.elasticsearch.action.search.SearchRequest;
 
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,8 +43,7 @@ public class QueryBuildTest {
     }
 
     @Test
-    void KnnQueryBuildOption테스트()
-    {
+    void KnnQueryBuildOption테스트() throws IOException {
         String imageUrl="https://dimg.donga.com/ugc/CDB/SHINDONGA/Article/62/65/e6/3e/6265e63e0bf7d2738276.jpg";
         String[] vectors=imageToVector.imageUrlToVector(imageUrl);
         SearchRequest searchRequest= new SearchRequest("test-image-vector-angular");
@@ -47,8 +53,16 @@ public class QueryBuildTest {
         searchSourceBuilder.from(0);
         searchSourceBuilder.query(knnQueryBuilder);
         searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse=client.search(searchRequest, RequestOptions.DEFAULT);
+        SearchHits hits = searchResponse.getHits();
+        Map<String,Object> results= new HashMap<>();
+        for(SearchHit hit : hits)
+        {
+            System.out.println(hit.getSourceAsString());
+        }
         System.out.println("검색 소스");
         System.out.println(searchSourceBuilder);
+
     }
     @Test
     void SimilarityFindTest(){
