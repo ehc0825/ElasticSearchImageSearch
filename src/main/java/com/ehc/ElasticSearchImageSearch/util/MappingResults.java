@@ -1,6 +1,6 @@
 package com.ehc.ElasticSearchImageSearch.util;
 
-import com.ehc.ElasticSearchImageSearch.dto.ImageSearchResults;
+import com.ehc.ElasticSearchImageSearch.dao.ImageSearchResults;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,6 @@
 package com.ehc.ElasticSearchImageSearch.util;
 
-import com.ehc.ElasticSearchImageSearch.dao.ResponseVector;
-import org.apache.coyote.Response;
+import com.ehc.ElasticSearchImageSearch.dto.ResponseVector;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

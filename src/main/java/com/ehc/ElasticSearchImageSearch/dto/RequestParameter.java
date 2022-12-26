@@ -1,4 +1,4 @@
-package com.ehc.ElasticSearchImageSearch.dao;
+package com.ehc.ElasticSearchImageSearch.dto;
 
 import lombok.Data;
 
