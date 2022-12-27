@@ -16,6 +16,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -24,7 +25,7 @@ dependencies {
 	implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:7.5.1'
 	implementation 'org.elasticsearch.client:elasticsearch-rest-client:7.5.1'
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3'
-	implementation fileTree(dir:'libs', include:'*.jar')
+	implementation 'com.github.ehc0825:elastiknnQueryBuild:7.10.2-oss'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
