@@ -1,5 +1,6 @@
 package com.ehc.ElasticSearchImageSearch.util;
 
+import com.ehc.ElasticSearchImageSearch.util.similarity.ImageSearchQuery;
 import com.ehc.elastiknnSimilarityQuery.Similarity;
 import com.ehc.elastiknnSimilarityQuery.query.KnnQueryBuilder;
 import org.elasticsearch.action.search.SearchRequest;
@@ -13,12 +14,11 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @SpringBootTest
 public class QueryBuildTest {
@@ -28,6 +28,8 @@ public class QueryBuildTest {
 
     @Autowired
     RestHighLevelClient client;
+
+
 
     @Test
     void String_쿼리_테스트(){
@@ -73,4 +75,23 @@ public class QueryBuildTest {
            System.out.println("실패");
        }
     }
+
+    @Test
+    void strangeVectorTest()
+    {
+        boolean success=false;
+        String strangeVector="[0.9217332601547241,1.523964524269104,1.6131728887557983,1.0742337703704834";
+        strangeVector= ImageSearchQuery.getVectorForQuery(strangeVector);
+        if(strangeVector.equals(""))
+        {
+            success=true;
+        }
+        strangeVector="[0.9217332601547241,1.523964524269104,1.6131728887557983,1.0742337703704834]";
+        if(strangeVector.equals(""))
+        {
+            success=false;
+        }
+        assertThat(success).isTrue();
+    }
+
 }

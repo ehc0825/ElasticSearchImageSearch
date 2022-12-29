@@ -61,10 +61,8 @@ public class ImageSearchQuery {
         String vectorForQuery="";
         Pattern pattern = Pattern.compile("(\\[)(.*?)(\\])");
         Matcher matcher= pattern.matcher(vector);
-        while (matcher.find()) {
+        if (matcher.find()) {
             vectorForQuery=matcher.group(2);
-            if(matcher.group(1) ==  null)
-                break;
         }
         return vectorForQuery;
     }

@@ -1,26 +1,22 @@
 package com.ehc.ElasticSearchImageSearch.util.similarity;
 
-import com.ehc.ElasticSearchImageSearch.util.similarity.similarities.Cosine;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Map;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class SimilarityEnumTest {
-
-
 
     @Test
     void SimilarityMap_getTest()
     {
-        boolean success;
+        boolean success = false;
         Map<String,Similarity> similarityMap=SimilarityEnum.getSimilarityMap();
-        if(similarityMap.size()==3)
+        for(Map.Entry<String, Similarity> similarity: similarityMap.entrySet())
         {
-            if(similarityMap.get("cosine").similarityName.equals("cosine"))
-            {
+            if(similarityMap.get(similarity.getKey()).similarityName.equals(similarity.getValue().similarityName)) {
                 success=true;
             }
             else
@@ -28,31 +24,51 @@ class SimilarityEnumTest {
                 success=false;
             }
         }
-        else
-        {
-            success=false;
-        }
-        if(success)
-        {
-            System.out.println("Map get 테스트 성공");
-        }
-        else
-        {
-            System.out.println("Map get 테스트 실패");
-        }
+        assertThat(success).isTrue();
     }
 
     @Test
-    void ImageSearchQueryGetTest()
+    void ImageSearchQueryGetCosineTest()
     {
+        boolean success;
         String query=SimilarityEnum.getImageQueryBySimilarity("cosine",0,10,"{\"vector\":[0.9217332601547241,1.523964524269104,1.6131728887557983,1.0742337703704834]}");
         if(query.contains("angular"))
         {
-            System.out.println("이미지 쿼리 Get성공");
-            System.out.println(query);
+            success=true;
         }else
         {
-            System.out.println("이미지 쿼리 Get실패");
+           success=false;
         }
+        assertThat(success).isTrue();
+    }
+
+    @Test
+    void ImageSearchQueryGetL2Test()
+    {
+        boolean success;
+        String query=SimilarityEnum.getImageQueryBySimilarity("l2",0,10,"{\"vector\":[0.9217332601547241,1.523964524269104,1.6131728887557983,1.0742337703704834]}");
+        if(query.contains("l2"))
+        {
+            success=true;
+        }else
+        {
+            success=false;
+        }
+        assertThat(success).isTrue();
+    }
+
+    @Test
+    void ImageSearchQueryGetPermutation_lshTest()
+    {
+        boolean success;
+        String query=SimilarityEnum.getImageQueryBySimilarity("permutation_lsh",0,10,"{\"vector\":[0.9217332601547241,1.523964524269104,1.6131728887557983,1.0742337703704834]}");
+        if(query.contains("permutation_lsh"))
+        {
+            success=true;
+        }else
+        {
+            success=false;
+        }
+        assertThat(success).isTrue();
     }
 }
