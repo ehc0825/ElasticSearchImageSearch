@@ -3,8 +3,11 @@ package com.ehc.ElasticSearchImageSearch.util;
 import com.ehc.ElasticSearchImageSearch.dto.ImageSearchResults;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.search.SearchHit;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,14 +16,15 @@ public class MappingResults {
 
 
 
-    public ImageSearchResults mappingImageSearchResults(String results) throws JsonProcessingException {
+    public ImageSearchResults mappingImageSearchResults(SearchResponse searchResponse) {
         ImageSearchResults imageSearchResults=new ImageSearchResults();
-        Map<Object,Object> searchResult=new ObjectMapper().readValue(results,Map.class);
-        Map<String,Object> searchHits= (Map<String, Object>) searchResult.get("hits");
-        Map<String,Object> totalCountMap= (Map<String, Object>) searchHits.get("total");
-        int totalCount= (int) totalCountMap.get("value");
-        List<Map<String,Object>> resultsHits= (List<Map<String, Object>>) searchHits.get("hits");
-        imageSearchResults.setResults(resultsHits);
+        List<Map<String,Object>> results=new ArrayList<>();
+        for(SearchHit hit:searchResponse.getHits())
+        {
+            results.add(hit.getSourceAsMap());
+        }
+        int totalCount= (int) searchResponse.getHits().getTotalHits().value;
+        imageSearchResults.setResults(results);
         imageSearchResults.setTotal(totalCount);
         return imageSearchResults;
     }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @RestController
@@ -18,8 +19,9 @@ public class ImageSearchRestController {
     @Autowired
     ImageSearchService imageSearchService;
 
-    @PutMapping("/putImageFolder")
-    public void putImageFolder(){
+    @PutMapping("/image")
+    public void putImageFolder(@RequestBody RequestParameter requestParameter){
+        imageSearchService.putImageService(requestParameter);
 
     }
 
@@ -28,7 +30,7 @@ public class ImageSearchRestController {
        ImageSearchResults imageSearchResults=new ImageSearchResults();
         try {
             imageSearchResults=imageSearchService.searchImage(requestParameter);
-        } catch (JsonProcessingException e) {
+        } catch (IOException e) {
             imageSearchResults.setResults(new ArrayList<>());
             imageSearchResults.setTotal(0);
         }
