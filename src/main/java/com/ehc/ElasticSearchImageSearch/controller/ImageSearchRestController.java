@@ -20,9 +20,9 @@ public class ImageSearchRestController {
     ImageSearchService imageSearchService;
 
     @PutMapping("/image")
-    public void putImageFolder(@RequestBody RequestParameter requestParameter){
+    public String putImage(@RequestBody RequestParameter requestParameter){
         imageSearchService.putImageService(requestParameter);
-
+        return "success";
     }
 
     @PostMapping("/searchImage")
