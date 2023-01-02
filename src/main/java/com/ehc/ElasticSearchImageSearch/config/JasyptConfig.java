@@ -12,9 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.stream.Collectors;
 
 @Configuration
 @EnableEncryptableProperties
@@ -46,14 +43,11 @@ public class JasyptConfig {
             ClassPathResource resource = new ClassPathResource("jasypt-encryptor-password.txt");
             InputStream inputStream=resource.getInputStream();
             Reader reader = new InputStreamReader(inputStream);
-
             StringBuilder result = new StringBuilder();
-
             for (int data = reader.read(); data != -1; data = reader.read()) {
                 result.append((char)data);
             }
             return result.toString();
-
         } catch (IOException e) {
             throw new RuntimeException("Not found Jasypt password file.");
         }
