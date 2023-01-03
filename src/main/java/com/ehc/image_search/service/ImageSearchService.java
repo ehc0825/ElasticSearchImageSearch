@@ -35,8 +35,7 @@ public class ImageSearchService {
     public ImageSearchResults searchImage(RequestParameter requestParameter) throws IOException {
         SearchRequest searchRequest = getSearchRequest(requestParameter);
         SearchResponse searchResponse=imageSearchDao.searchImage(searchRequest);
-        ImageSearchResults imageSearchResults=mappingResults.mappingImageSearchResults(searchResponse);//json 형태의 String 으로 넘어온 결과를 결과 값에 맞게 맵핑한다.
-        return imageSearchResults;
+        return  mappingResults.mappingImageSearchResults(searchResponse);//json 형태의 String 으로 넘어온 결과를 결과 값에 맞게 맵핑한다
     }
 
     private SearchRequest getSearchRequest(RequestParameter requestParameter) {

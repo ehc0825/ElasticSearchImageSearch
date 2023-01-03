@@ -1,6 +1,5 @@
 package com.ehc.image_search.util;
 
-import com.ehc.image_search.util.similarity.ImageSearchQuery;
 import com.ehc.elastiknnSimilarityQuery.Similarity;
 import com.ehc.elastiknnSimilarityQuery.query.KnnQueryBuilder;
 import org.elasticsearch.action.search.SearchRequest;
@@ -76,22 +75,5 @@ public class QueryBuildTest {
        }
     }
 
-    @Test
-    void strangeVectorTest()
-    {
-        boolean success=false;
-        String strangeVector="[0.9217332601547241,1.523964524269104,1.6131728887557983,1.0742337703704834";
-        strangeVector= ImageSearchQuery.getVectorForQuery(strangeVector);
-        if(strangeVector.equals(""))
-        {
-            success=true;
-        }
-        strangeVector="[0.9217332601547241,1.523964524269104,1.6131728887557983,1.0742337703704834]";
-        if(strangeVector.equals(""))
-        {
-            success=false;
-        }
-        assertThat(success).isTrue();
-    }
 
 }

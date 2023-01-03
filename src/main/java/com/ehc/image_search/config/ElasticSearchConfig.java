@@ -4,9 +4,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -19,41 +17,31 @@ public class ElasticSearchConfig {
 
 
     @Value("${elasticsearch.protocol}")
-    private String elastic_protocol;
+    private String elasticProtocol;
 
     @Value("${elasticsearch.host}")
-    private String elastic_host;
+    private String elasticHost;
 
     @Value("${elasticsearch.port}")
-    private int elastic_port;
+    private int elasticPort;
 
     @Value("${elasticsearch.id}")
-    private String elastic_id;
+    private String elasticId;
 
     @Value("${elasticsearch.password}")
-    private String elastic_password;
+    private String elasticPassword;
 
     @Bean(name = "client",destroyMethod = "close")
     public RestHighLevelClient highLevelClient(){
-        RestClientBuilder restClientBuilder = RestClient.builder(new HttpHost(elastic_host, elastic_port, elastic_protocol));
+        RestClientBuilder restClientBuilder = RestClient.builder(new HttpHost(elasticHost, elasticPort, elasticProtocol));
 
-        restClientBuilder.setRequestConfigCallback(new RestClientBuilder.RequestConfigCallback() {
-            @Override
-            public RequestConfig.Builder customizeRequestConfig(RequestConfig.Builder requestConfigBuilder) {
-                return requestConfigBuilder.setConnectTimeout(30*1000).setConnectTimeout(10*60*1000);
-            }
-        });
-        if(elastic_id!=null && elastic_password!=null)
+        restClientBuilder.setRequestConfigCallback(requestConfigBuilder -> requestConfigBuilder.setConnectTimeout(30*1000).setConnectTimeout(10*60*1000));
+        if(elasticId!=null && elasticPassword!=null)
         {
             final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
             credentialsProvider.setCredentials(AuthScope.ANY,
-                    new UsernamePasswordCredentials(elastic_id,elastic_password));
-            restClientBuilder.setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {
-                @Override
-                public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpClientBuilder) {
-                    return httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
-                }
-            });
+                    new UsernamePasswordCredentials(elasticId,elasticPassword));
+            restClientBuilder.setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider));
         }
         return new RestHighLevelClient(restClientBuilder);
     }
