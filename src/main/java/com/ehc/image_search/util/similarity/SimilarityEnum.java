@@ -2,7 +2,7 @@ package com.ehc.image_search.util.similarity;
 
 import com.ehc.image_search.util.similarity.similarities.Cosine;
 import com.ehc.image_search.util.similarity.similarities.L2;
-import com.ehc.image_search.util.similarity.similarities.Permutation_lsh;
+import com.ehc.image_search.util.similarity.similarities.PermutationLsh;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ public enum SimilarityEnum {
 
     COSINE(new Cosine()),
     L2(new L2()),
-    PERMUTATION_LSH(new Permutation_lsh());
+    PERMUTATION_LSH(new PermutationLsh());
 
 
     private Similarity similarity;
@@ -30,7 +30,7 @@ public enum SimilarityEnum {
         Map<String, Similarity> similarityMap= new HashMap<>();
         for(SimilarityEnum similarity: SimilarityEnum.values())
         {
-            similarityMap.put(similarity.similarity.similarityName,similarity.similarity);
+            similarityMap.put(similarity.similarity.getSimilarityName(),similarity.similarity);
         }
         return similarityMap;
     }

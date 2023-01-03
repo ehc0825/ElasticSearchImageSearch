@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
-
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
 class ElasticSearchConfigTest {
@@ -19,7 +19,7 @@ class ElasticSearchConfigTest {
     RestClient lowClient;
 
     @Test
-    void highLevelClient연결_테스트(){
+    void highLevelClient_connection_test(){
         SearchRequest searchRequest=new SearchRequest();
         boolean success=false;
         String reason="";
@@ -37,10 +37,11 @@ class ElasticSearchConfigTest {
                 System.out.println(reason);
             }
         }
+        assertThat(success).isTrue();
     }
 
     @Test
-    void lowLevelClient연결_테스트() {
+    void lowLevelClient_connection_test() {
         Request request=new Request("GET","/_search");
         boolean success=false;
         String reason="";
@@ -61,8 +62,7 @@ class ElasticSearchConfigTest {
                 System.out.println(reason);
             }
         }
-
-
+        assertThat(success).isTrue();
     }
 
 }

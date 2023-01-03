@@ -13,14 +13,15 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @SpringBootTest
-public class QueryBuildTest {
+class QueryBuildTest {
 
     @Autowired
     ImageToVector imageToVector;
@@ -31,7 +32,7 @@ public class QueryBuildTest {
 
 
     @Test
-    void String_쿼리_테스트(){
+    void String_query_test(){
         String imageUrl="https://dimg.donga.com/ugc/CDB/SHINDONGA/Article/62/65/e6/3e/6265e63e0bf7d2738276.jpg";
         String[] vector=imageToVector.imageUrlToVector(imageUrl);
         SearchSourceBuilder searchSourceBuilder=new SearchSourceBuilder();
@@ -41,10 +42,11 @@ public class QueryBuildTest {
         searchSourceBuilder.query(knnQueryBuilder);
         String query=searchSourceBuilder.toString();
         System.out.println(query);
+        assertThat(query).isNotEmpty();
     }
 
     @Test
-    void KnnQueryBuildOption테스트() throws IOException {
+    void KnnQueryBuildOptionTest() throws IOException {
         String imageUrl="https://dimg.donga.com/ugc/CDB/SHINDONGA/Article/62/65/e6/3e/6265e63e0bf7d2738276.jpg";
         String[] vectors=imageToVector.imageUrlToVector(imageUrl);
         SearchRequest searchRequest= new SearchRequest("test-image-vector-angular");
@@ -56,23 +58,24 @@ public class QueryBuildTest {
         searchRequest.source(searchSourceBuilder);
         SearchResponse searchResponse=client.search(searchRequest, RequestOptions.DEFAULT);
         SearchHits hits = searchResponse.getHits();
-        Map<String,Object> results= new HashMap<>();
         for(SearchHit hit : hits)
         {
             System.out.println(hit.getSourceAsString());
         }
         System.out.println("검색 소스");
         System.out.println(searchSourceBuilder);
-
+        assertThat(searchSourceBuilder.toString()).isNotEmpty();
     }
     @Test
     void SimilarityFindTest(){
+        boolean success=false;
        if(Similarity.find("exact").toString().equals("exact")) {
-           System.out.println("성공");
+          success=true;
        }
        else {
-           System.out.println("실패");
+           success=false;
        }
+       assertThat(success).isTrue();
     }
 
 

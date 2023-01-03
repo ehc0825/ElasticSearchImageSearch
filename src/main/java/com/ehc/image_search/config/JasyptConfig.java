@@ -49,7 +49,7 @@ public class JasyptConfig {
             }
             return result.toString();
         } catch (IOException e) {
-            throw new RuntimeException("Not found Jasypt password file.");
+            return e.getMessage();
         }
     }
 }

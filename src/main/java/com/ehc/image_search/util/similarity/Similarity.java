@@ -1,6 +1,18 @@
 package com.ehc.image_search.util.similarity;
 
 public abstract class Similarity {
-    public String similarityName;
-    public String indexName;
+
+    protected String similarityName;
+    protected String indexName;
+
+    public String getSimilarityName() {
+        return similarityName;
+    }
+
+
+    public String getIndexName() {
+        return indexName;
+    }
+
+
 }
