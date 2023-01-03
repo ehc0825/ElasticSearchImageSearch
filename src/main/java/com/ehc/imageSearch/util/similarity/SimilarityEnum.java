@@ -1,0 +1,55 @@
+package com.ehc.imageSearch.util.similarity;
+
+import com.ehc.imageSearch.util.similarity.similarities.Cosine;
+import com.ehc.imageSearch.util.similarity.similarities.L2;
+import com.ehc.imageSearch.util.similarity.similarities.Permutation_lsh;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+
+public enum SimilarityEnum {
+
+    COSINE(new Cosine()),
+    L2(new L2()),
+    PERMUTATION_LSH(new Permutation_lsh());
+
+
+    private Similarity similarity;
+    SimilarityEnum( Similarity similarity)
+    {
+        this.similarity=similarity;
+    }
+
+
+    /**
+     * Similarity이름과 Similarity 세트를 Map형태로 return
+     */
+    public static Map<String, Similarity> getSimilarityMap(){
+        Map<String, Similarity> similarityMap= new HashMap<>();
+        for(SimilarityEnum similarity: SimilarityEnum.values())
+        {
+            similarityMap.put(similarity.similarity.similarityName,similarity.similarity);
+        }
+        return similarityMap;
+    }
+
+    /**
+     * 해당 similarityName에 맞는 ImageSearchQuery를 return
+     */
+    public static String getImageQueryBySimilarity(String similarityName,int from,int size, String vector)
+    {
+        Map<String, Similarity> similarityMap=getSimilarityMap();
+        return similarityMap.get(similarityName).queryForSimilarity(from,size,vector);
+    }
+
+    /**
+     * 해당 similarityName에 맞는 indexName을 return
+     */
+    public static String getIndexNameBySimilarity(String similarityName)
+    {
+        Map<String, Similarity> similarityMap=getSimilarityMap();
+        return similarityMap.get(similarityName).indexName;
+    }
+}
