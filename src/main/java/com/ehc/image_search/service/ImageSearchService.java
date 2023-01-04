@@ -33,7 +33,7 @@ public class ImageSearchService {
     public void putImageService(RequestParameter requestParameter) throws IOException {
         IndexRequest indexRequest=setIndexRequest(requestParameter);
         IndexResponse indexResponse=imageSearchDao.indexImageDoc(indexRequest);
-        //TODO:221231여기까지 함
+        //TODO:230104할일 index insert testcase 추가 , index api 완료
 
     }
 
