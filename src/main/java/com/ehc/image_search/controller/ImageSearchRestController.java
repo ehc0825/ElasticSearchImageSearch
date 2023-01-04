@@ -19,7 +19,7 @@ public class ImageSearchRestController {
     ImageSearchService imageSearchService;
 
     @PutMapping("/image")
-    public String putImage(@RequestBody RequestParameter requestParameter){
+    public String putImage(@RequestBody RequestParameter requestParameter) throws IOException {
         imageSearchService.putImageService(requestParameter);
         return "success";
     }

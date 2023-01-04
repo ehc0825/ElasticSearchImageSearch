@@ -1,5 +1,7 @@
 package com.ehc.image_search.dao;
 
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.*;
@@ -21,4 +23,10 @@ public class ImageSearchDao {
     public SearchResponse searchImage(SearchRequest searchRequest) throws IOException {
             return client.search(searchRequest, RequestOptions.DEFAULT);
     }
+
+    public IndexResponse indexImageDoc(IndexRequest indexRequest) throws IOException {
+        return client.index(indexRequest,RequestOptions.DEFAULT);
+    }
+
+
 }
