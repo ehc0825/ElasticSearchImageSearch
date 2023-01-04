@@ -19,11 +19,9 @@ public class ImageSearchDao {
     @Autowired
     RestHighLevelClient client;
 
-
     public SearchResponse searchImage(SearchRequest searchRequest) throws IOException {
             return client.search(searchRequest, RequestOptions.DEFAULT);
     }
-
     public IndexResponse indexImageDoc(IndexRequest indexRequest) throws IOException {
         return client.index(indexRequest,RequestOptions.DEFAULT);
     }
