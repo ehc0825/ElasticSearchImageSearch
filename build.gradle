@@ -125,6 +125,6 @@ sonarqube {
 		property "sonar.profile", "Sonar way"
 		property "sonar.scm.provider", "git"
 		property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/jacocoTestReport.xml"
-		property "sonar.exclusions", "**/config/JasyptConfig.java ,**/dto/*, **/controller/*, **/service/*, **/ElasticSearchImageSearchApplication.java"
+		property "sonar.exclusions", "**/config/JasyptConfig.java ,**/dto/*,**/dao/*, **/controller/*, **/cofig/ElasticSearchConfig.java, **/service/*, **/ElasticSearchImageSearchApplication.java"
 	}
 }

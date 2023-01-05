@@ -2,6 +2,7 @@ package com.ehc.image_search.util;
 
 import com.ehc.elastiknnSimilarityQuery.Similarity;
 import com.ehc.elastiknnSimilarityQuery.query.KnnQueryBuilder;
+import com.ehc.image_search.util.similarity.SimilarityEnum;
 import org.elasticsearch.action.search.SearchRequest;
 
 import org.elasticsearch.action.search.SearchResponse;
@@ -49,7 +50,7 @@ class QueryBuildTest {
     void KnnQueryBuildOptionTest() throws IOException {
         String imageUrl="https://dimg.donga.com/ugc/CDB/SHINDONGA/Article/62/65/e6/3e/6265e63e0bf7d2738276.jpg";
         String[] vectors=imageToVector.imageUrlToVector(imageUrl);
-        SearchRequest searchRequest= new SearchRequest("test-image-vector-angular");
+        SearchRequest searchRequest= new SearchRequest(SimilarityEnum.getIndexNameBySimilarity(SimilarityEnum.COSINE.toString()));
         SearchSourceBuilder searchSourceBuilder=new SearchSourceBuilder();
         KnnQueryBuilder knnQueryBuilder=new KnnQueryBuilder("vector",Similarity.COSINE,vectors,100);
         searchSourceBuilder.size(10);
