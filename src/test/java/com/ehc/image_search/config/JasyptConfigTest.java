@@ -11,7 +11,7 @@ class JasyptConfigTest {
     JasyptConfig jasyptConfig;
 
     @Test
-    void encrypt_Test(){
+    void test_encrypt(){
         String str="password";
         String encrypt_Password=jasyptConfig.jasyptStringEncryptor().encrypt(str);
         System.out.println("encrypt_Password =>"+encrypt_Password);
