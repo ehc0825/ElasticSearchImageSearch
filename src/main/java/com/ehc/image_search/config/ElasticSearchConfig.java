@@ -47,7 +47,7 @@ public class ElasticSearchConfig {
     }
 
     @Bean(name = "lowClient", destroyMethod = "close")
-    public RestClient lowLevenClient(){
+    public RestClient lowLevelClient(){
        return highLevelClient().getLowLevelClient();
     }
 
