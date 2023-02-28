@@ -1,15 +1,16 @@
 package com.ehc.image_search.util;
 
 import com.ehc.image_search.dto.ImageSearchResults;
+import lombok.experimental.UtilityClass;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
-import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@UtilityClass
 public class MappingResults {
 
 

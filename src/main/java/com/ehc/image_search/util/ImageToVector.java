@@ -1,9 +1,9 @@
 package com.ehc.image_search.util;
 
 import com.ehc.image_search.dto.ResponseVector;
+import lombok.experimental.UtilityClass;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.StandardCharsets;
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-@Service
+@UtilityClass
 public class ImageToVector {
 
 
